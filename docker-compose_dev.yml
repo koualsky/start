@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_dev
+    container_name: web
+    command: python manage_dev.py runserver 0.0.0.0:8001
+    volumes:
+      - .:/code
+    ports:
+      - "5555:8001"
+    env_file:
+      - etc/dev.env

@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_prod
+    container_name: web
+    command: bash -c "nginx && gunicorn --bind 0.0.0.0:8001 --env DJANGO_SETTINGS_MODULE=web.settings.prod web.wsgi"
+    volumes:
+      - .:/code
+      - static_volume:/code/static
+      - media_volume:/code/media
+    ports:
+      - "5555:80"
+    env_file:
+      - etc/prod.env
+    depends_on:
+      - db
+volumes:
+  static_volume:
+  media_volume:
