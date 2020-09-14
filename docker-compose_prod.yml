@@ -16,6 +16,7 @@ services:
     command: bash -c "nginx && gunicorn --bind 0.0.0.0:8001 --env DJANGO_SETTINGS_MODULE=web.settings.prod web.wsgi"
     volumes:
       - .:/code
+      - /code/frontend/node_modules
       - static_volume:/code/static
       - media_volume:/code/media
     ports:

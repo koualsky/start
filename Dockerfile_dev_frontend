@@ -1,0 +1,8 @@
+FROM node:12.18.3
+WORKDIR /code/frontend
+ENV PATH /code/frontend/node_modules/.bin:$PATH
+COPY frontend/package.json ./
+RUN npm install --silent
+RUN npm install react-scripts@3.4.3 -g --silent
+COPY . ./
+CMD ["npm", "start"]

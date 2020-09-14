@@ -9,7 +9,29 @@ services:
     command: python manage_dev.py runserver 0.0.0.0:8001
     volumes:
       - .:/code
+      - static_volume:/code/static
+      - media_volume:/code/media
     ports:
       - "5555:8001"
     env_file:
       - etc/dev.env
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile_dev_frontend
+    container_name: frontend
+    volumes:
+      - .:/code
+      - /code/frontend/node_modules
+      - static_volume:/code/static
+      - media_volume:/code/media
+    ports:
+      - 3001:3000
+    env_file:
+      - etc/dev.env
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+volumes:
+  static_volume:
+  media_volume:
