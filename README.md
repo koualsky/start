@@ -1,5 +1,6 @@
 # Django + React + Postgres + Nginx "Ready to deploy Starter Project"
 
+<img src="https://github.com/koualsky/start/blob/master/demo.gif?raw=true">
 <img src="https://github.com/koualsky/start/blob/master/demo.png?raw=true">
 
 ## Run
